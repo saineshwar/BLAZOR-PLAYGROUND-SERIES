@@ -1,0 +1,75 @@
+﻿@page "/UserGrid"
+@page "/UserGrid/{Page:int}"
+
+@inherits UserGridComponentBase
+<div class="col-md-12">
+
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Grid</h5>
+        </div>
+        <div class="card-body">
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <input @bind-value="Search"
+                           class="form-control" type="text" placeholder="Filter...">
+
+                </div>
+                <div class="form-group col-md-4">
+                    <button class="btn btn-success" @onclick="SearchClick">Search</button>
+                    <button class="btn btn-danger" @onclick="ClearClick">Clear</button>
+                </div>
+            </div>
+            <div class="row">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>FirstName</th>
+                            <th>MiddleName</th>
+                            <th>LastName</th>
+                            <th>EmailId</th>
+                            <th>MobileNo</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int counter = 1;
+                        }
+                        @foreach (var usermaster in Data)
+                        {
+
+                            <tr @key="usermaster.UserId">
+                                <td> @counter</td>
+                                <td>@usermaster.FirstName</td>
+                                <td>@usermaster.MiddleName</td>
+                                <td>@usermaster.LastName</td>
+                                <td>@usermaster.EmailId</td>
+                                <td>@usermaster.MobileNo</td>
+                                <td><a class="btn btn-warning" href="/EditUser/@usermaster.UserId">Edit</a></td>
+                                <td><button type="button" class="btn btn-danger" @onclick="@(e => Delete(usermaster.UserId))">Delete</button></td>
+                            </tr>
+
+                            counter++;
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="row">
+                <ul class="pagination">
+                    @for (var i = 1; i <= TotalPages; i++)
+                    {
+                        <li class="page-item @(i == CurrentPage ? "active" : "")">
+                            <a href="/UserGrid/@i" class="page-link">@i</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>

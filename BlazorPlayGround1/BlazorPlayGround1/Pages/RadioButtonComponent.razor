@@ -1,0 +1,35 @@
+﻿@page "/RadioExample"
+@inherits RadioButtonComponentBase
+
+<EditForm Model="@RadioButtonViewModel" OnValidSubmit="@FormSubmitted">
+
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">RadioButton</h5>
+        </div>
+        <div class="card-body">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label>Gender: </label>
+                    <br />
+                    <ValidationMessage For="@(() => RadioButtonViewModel.SelectedGender)" />
+                    <InputRadioGroup ValueChanged="@((string value) => SelectionChanged(value))"
+                                     ValueExpression="@(() => RadioButtonViewModel.SelectedGender)"
+                                     Value="@RadioButtonViewModel.SelectedGender"
+                                     class="form-control">
+                        @foreach (var gender in RadioButtonViewModel.ListofGender)
+                        {
+                            <InputRadio Value="gender.Value" />@gender.Text <br />
+                        }
+                    </InputRadioGroup>
+                </div>
+             
+            </div>
+        </div>
+        <div class="card-footer">
+
+            <button type="submit" class="btn btn-success">Submit</button>
+            Selected:- @SelectedValue
+        </div>
+    </div>
+</EditForm>

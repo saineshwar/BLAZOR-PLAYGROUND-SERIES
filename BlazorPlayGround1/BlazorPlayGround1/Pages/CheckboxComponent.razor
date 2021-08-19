@@ -1,0 +1,29 @@
+﻿@page "/CheckboxExample"
+@inherits CheckboxComponentBase
+
+
+<EditForm Model="@CheckboxViewModel" OnValidSubmit="@FormSubmitted">
+
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Checkbox</h5>
+        </div>
+        <div class="card-body">
+            <div class="form-group col-md-4">
+                <label for="Status">Status: </label>
+                <InputCheckbox @bind-Value="CheckboxViewModel.Status" />
+
+            </div>
+        </div>
+        <div class="card-footer">
+            @if (CheckboxViewModel.Status)
+            {
+                <label> Selected Value :- </label>   <label>True</label>
+            }
+            else
+            {
+                <label> Selected Value :- </label>   <label>False</label>
+            }
+        </div>
+    </div>
+</EditForm>

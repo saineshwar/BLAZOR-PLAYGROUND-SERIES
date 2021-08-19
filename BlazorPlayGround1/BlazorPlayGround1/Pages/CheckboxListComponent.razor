@@ -1,0 +1,62 @@
+﻿@page "/CheckboxList"
+@inherits CheckboxListComponentBase
+
+<div class="col-md-12">
+
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">CheckboxList</h5>
+        </div>
+        <div class="card-body">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>DeviceName</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var electronic in CheckboxListViewModel.ListofDevices)
+                                {
+                                    <tr>
+                                        <td>@electronic.Text</td>
+                                        <td>
+                                            <input type="checkbox" @onchange="@(x => CheckboxChange(x, electronic.Value, electronic.Text))" />
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="col-md-4">
+                        @if (ListofSelectedDevices != null && ListofSelectedDevices.Any())
+                        {
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Selected DeviceId</th>
+                                        <th>DeviceName</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var selectedDevice in ListofSelectedDevices)
+                                    {
+                                        <tr>
+                                            <td>@selectedDevice.Value</td>
+                                            <td>@selectedDevice.Text</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

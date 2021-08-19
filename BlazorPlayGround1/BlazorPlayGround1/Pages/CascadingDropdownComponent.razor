@@ -1,0 +1,66 @@
+﻿
+@page "/CascadingDropdown"
+@inherits CascadingDropdownComponentBase
+<div class="col-md-12">
+    <EditForm Model="@CascadingVM" OnValidSubmit="@FormSubmitted">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">Cascading Dropdown</h5>
+            </div>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="Countries">Countries</label>
+                        <InputSelect id="Countries" class="form-control"
+                                     ValueExpression="@(() => CascadingVM.CountryId)"
+                                     Value="@CascadingVM.CountryId"
+                                     ValueChanged="@((string value) => OnCountryChange(value))">
+
+                            @foreach (var state in CascadingVM.ListofCountries)
+                            {
+                                <option value="@state.Value">@state.Text</option>
+                            }
+                        </InputSelect>
+                        <ValidationMessage For="@(() => CascadingVM.CountryId)" />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="State">State</label>
+                        <InputSelect id="State" class="form-control"
+                                     ValueExpression="@(() => CascadingVM.StateId)"
+                                     Value="@CascadingVM.StateId"
+                                     ValueChanged="@((string value) => OnStateChange(value))">
+
+                            @if (CascadingVM.ListofState != null)
+                            {
+                                @foreach (var state in CascadingVM.ListofState)
+                                {
+                                    <option value="@state.Value">@state.Text</option>
+                                }
+                            }
+                        </InputSelect>
+                        <ValidationMessage For="@(() => CascadingVM.StateId)" />
+
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="City">City</label>
+                        <InputSelect id="City" class="form-control"
+                                     ValueExpression="@(() => CascadingVM.CityId)"
+                                     Value="@CascadingVM.CityId"
+                                     ValueChanged="@((string value) => OnCityChange(value))">
+
+                            @if (CascadingVM.ListofCity != null)
+                            {
+                                @foreach (var city in CascadingVM.ListofCity)
+                                {
+                                    <option value="@city.Value">@city.Text</option>
+                                }
+                            }
+                        </InputSelect>
+                        <ValidationMessage For="@(() => CascadingVM.CityId)" />
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </EditForm>
+</div>

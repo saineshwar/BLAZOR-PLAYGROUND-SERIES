@@ -1,0 +1,35 @@
+﻿@page "/DropdownList"
+@inherits DropdownListComponentBase
+
+<div class="col-md-12">
+    <EditForm Model="@DropdownViewModel" OnValidSubmit="@FormSubmitted">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">Dropdown</h5>
+            </div>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="Devices">Devices</label>
+                        <InputSelect id="Devices" class="form-control" @bind-Value="DropdownViewModel.SelectedValue">
+
+                            @foreach (var state in DropdownViewModel.ListofDevices)
+                            {
+                                <option value="@state.Value">@state.Text</option>
+                            }
+                        </InputSelect>
+                        <ValidationMessage For="@(() => DropdownViewModel.SelectedValue)" />
+                    </div>
+
+                </div>
+            </div>
+            <div class="card-footer">
+                @if (!string.IsNullOrEmpty(@DropdownViewModel.SelectedValue))
+                {
+                    <label> Selected Value :- </label> @DropdownViewModel.SelectedValue
+                }
+
+            </div>
+        </div>
+    </EditForm>
+</div>

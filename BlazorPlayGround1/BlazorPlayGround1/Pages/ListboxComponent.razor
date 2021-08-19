@@ -1,0 +1,41 @@
+﻿@page "/Listbox"
+
+@inherits ListboxComponentBase
+
+
+
+<EditForm Model="@ListboxViewModel" OnValidSubmit="@FormSubmitted">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Listbox</h5>
+        </div>
+        <div class="card-body">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label>Item to Select</label>
+                    <select class="form-control" name="drop1" size="10" id="Select1">
+                        @foreach (var data in ListboxViewModel.ListofElectronicDevices)
+                        {
+                            <option @onclick="@(() => ListboxAddItem(data.Value, @data.Text))" value="@data.Value">@data.Text</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Selected Item</label>
+                    @if (ListboxViewModel.ListofSelectedDevices.Any())
+                    {
+                        <select class="form-control" name="drop1" size="10" id="Select1">
+                            @foreach (var data in ListboxViewModel.ListofSelectedDevices)
+                            {
+                                <option @onclick="@(() => ListboxRemoveItem(data.Value, @data.Text))" value="@data.Value">@data.Text</option>
+                            }
+                        </select>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+    </div>
+</EditForm>
